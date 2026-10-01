@@ -1,7 +1,5 @@
-"use client";
-
-import AuthSectionOne from "@/components/ui/auth-section-1";
+import AuthSection from "@/components/auth/AuthSection";
 
 export default function LoginPage() {
-  return <AuthSectionOne />;
+  return <AuthSection />;
 }

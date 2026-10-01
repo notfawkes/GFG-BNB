@@ -1,5 +1,5 @@
 /**
- * Generates an email-based avatar URL using Dicebear / UI-Avatars
+ * Generates an email-based avatar URL using Dicebear with black & orange theme
  */
 export function getEmailAvatarUrl(
   email?: string | null,
@@ -8,7 +8,7 @@ export function getEmailAvatarUrl(
   const seed = (displayName || email?.split("@")[0] || "Bala").trim();
   return `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
     seed
-  )}&backgroundColor=059669,10b981,0d9488&textColor=ffffff`;
+  )}&backgroundColor=fc7819,ea580c,18181b&textColor=ffffff`;
 }
 
 export function getEmailInitial(
