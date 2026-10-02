@@ -9,7 +9,7 @@ export default function Hero() {
   const { user, dbUser } = useAuth();
 
   const greetingName =
-    user?.displayName?.split(" ")[0] ||
+    user?.display_name?.split(" ")[0] ||
     dbUser?.display_name?.split(" ")[0] ||
     "Bala";
 
@@ -24,7 +24,7 @@ export default function Hero() {
         {/* Warm Pill Badge */}
         <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full text-xs font-medium bg-[#FC7819]/10 text-[#FC7819] border border-[#FC7819]/25 mb-6 backdrop-blur-sm shadow-sm animate-fadeIn">
           <span className="size-1.5 rounded-full bg-[#FC7819] animate-pulse" />
-          <span>Firebase Auth + Resend + Neon Serverless PostgreSQL</span>
+          <span>Password Auth + Neon Serverless PostgreSQL</span>
         </div>
 
         {/* Main Headline */}
@@ -38,7 +38,7 @@ export default function Hero() {
 
         {/* Subtitle */}
         <p className="max-w-2xl mx-auto text-sm sm:text-base text-zinc-600 leading-relaxed mb-8">
-          Effortless passwordless magic links delivered via Resend and secure email/password authentication, verified server-side with Firebase Admin and persisted in your Neon PostgreSQL database.
+          Secure email and password sign-in, verified server-side and stored in your Neon PostgreSQL database.
         </p>
 
         {/* Action Buttons */}
@@ -95,8 +95,8 @@ export default function Hero() {
                   <span className="text-[#FC7819] font-medium">{dbUser?.id || "Syncing..."}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Firebase UID:</span>
-                  <span className="truncate max-w-[200px] text-zinc-800">{user.uid}</span>
+                  <span>Neon User ID:</span>
+                  <span className="truncate max-w-[200px] text-zinc-800">{user.id}</span>
                 </div>
               </div>
 
@@ -119,17 +119,12 @@ export default function Hero() {
                   <span className="size-2 rounded-full bg-[#FC7819]" />
                   <span className="font-semibold text-zinc-800">auth_pipeline.ts</span>
                 </span>
-                <span className="text-[11px] text-[#FC7819] font-mono font-medium">POST /api/auth/send-link</span>
+                <span className="text-[11px] text-[#FC7819] font-mono font-medium">POST /api/auth/password</span>
               </div>
               <pre className="p-4 bg-[#141414] border border-black/20 rounded-xl text-[11px] font-mono text-zinc-200 overflow-x-auto leading-relaxed">
-{`// 1. Generate link via Firebase Admin SDK
-const link = await adminAuth.generateSignInWithEmailLink(email, settings);
-
-// 2. Send via Resend with template c3761b4f-a0e3-4983-aa5d-11a7c174bace
-await resend.emails.send({ to: email, template: { id: templateId, variables } });
-
-// 3. User verifies link -> Persisted in Neon PostgreSQL
-await sql\`INSERT INTO users (firebase_uid, email) VALUES ...\`;`}
+{`// Verify a password hash and create a Neon session
+const user = await verifyPassword(email, password);
+await sql\`INSERT INTO auth_sessions (token_hash, user_id, expires_at) VALUES (...)\`;`}
               </pre>
             </div>
           )}

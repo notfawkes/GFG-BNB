@@ -9,7 +9,7 @@ export default function Navbar() {
   const { user, dbUser, signOut, loading } = useAuth();
 
   const greetingName =
-    user?.displayName?.split(" ")[0] ||
+    user?.display_name?.split(" ")[0] ||
     dbUser?.display_name?.split(" ")[0] ||
     "Bala";
 

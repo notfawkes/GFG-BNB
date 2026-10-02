@@ -7,25 +7,25 @@ export default function Architecture() {
     {
       num: "01",
       title: "Client Intent",
-      desc: "User submits their email in the UI. Passwordless magic link or password-based auth mode is selected.",
+      desc: "User submits their email in the UI. Email and password are submitted securely.",
       tech: "Next.js App Router",
     },
     {
       num: "02",
-      title: "Admin Link Generation",
-      desc: "POST /api/auth/send-link invokes Firebase Admin SDK to generate a secure email sign-in link, bypassing client rate limits.",
-      tech: "Firebase Admin SDK",
+      title: "Password Verification",
+      desc: "The server verifies a password hash stored with the account.",
+      tech: "Node.js scrypt",
     },
     {
       num: "03",
-      title: "Resend Custom Template",
-      desc: "Resend dispatches a customized transactional email using template c3761b4f-a0e3-4983-aa5d-11a7c174bace with the generated link.",
-      tech: "Resend Email API",
+      title: "Session Creation",
+      desc: "A protected session is created and stored in Neon PostgreSQL.",
+      tech: "Neon PostgreSQL",
     },
     {
       num: "04",
       title: "Neon DB Persistence",
-      desc: "Upon clicking the link, the client verifies authentication and immediately syncs the user profile into Neon PostgreSQL.",
+      desc: "The signed-in account and its profile are loaded from Neon PostgreSQL.",
       tech: "Neon Serverless Postgres",
     },
   ];
@@ -42,7 +42,7 @@ export default function Architecture() {
             How the Authentication Flow Works
           </h2>
           <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed">
-            A resilient hybrid architecture combining Firebase Identity, Resend email routing, and Neon PostgreSQL serverless storage.
+            Password authentication and account sessions run through Neon PostgreSQL.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function Architecture() {
               Ready to test the authentication flow?
             </h3>
             <p className="mt-1 text-sm text-zinc-400">
-              Sign in with password or send yourself a magic link via Resend.
+              Create an account or sign in with your email and password.
             </p>
           </div>
           <div className="flex items-center space-x-3 shrink-0">

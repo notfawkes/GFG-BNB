@@ -15,7 +15,7 @@ export default function Footer() {
           </span>
           <span className="text-zinc-400 text-xs">|</span>
           <span className="text-xs text-zinc-500">
-            Next.js App Router • Firebase • Resend • Neon
+            Next.js App Router • Neon PostgreSQL
           </span>
         </div>
 
