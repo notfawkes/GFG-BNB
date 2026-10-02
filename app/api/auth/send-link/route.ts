@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     }
 
     const cleanEmail = email.trim().toLowerCase();
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ben-copular-kase.ngrok-free.dev";
 
     const actionCodeSettings = {
       url: `${baseUrl.replace(/\/$/, "")}/auth`,
@@ -42,10 +42,12 @@ export async function POST(request: Request) {
     };
 
     // Generate sign-in link via Firebase Admin SDK
+    console.log("Firebase ActionCodeSettings:", actionCodeSettings);
     const link = await adminAuth.generateSignInWithEmailLink(
       cleanEmail,
       actionCodeSettings
     );
+    console.log("GENERATED FIREBASE LINK:", link);
 
     // Send email via Resend using specified template ID
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
